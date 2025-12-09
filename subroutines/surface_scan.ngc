@@ -13,7 +13,7 @@ o<surface_scan> sub
   #<fast_fr> = #3056      (Fast probe feedrate)
   #<slow_fr> = #3057      (Slow probe feedrate)
   #<safez> = #3058        (Safe/traverse Z height in current WCS)
-  #<depthz> = #3059       (Maximum search depth - negative value)
+  #<depthz> = #3059       (Maximum search depth - positive value, distance to probe down)
   
   ; ============================================================
   ; Configuration constants
@@ -77,10 +77,10 @@ o<surface_scan> sub
     (ABORT, Invalid slow_fr parameter)
   o107 endif
   
-  ; Validate depth is negative
-  o108 if [#<depthz> GE 0]
-    (MSG, ERROR: Search depth must be negative)
-    (ABORT, Invalid depthz parameter - must be below current position)
+  ; Validate depth is positive (distance to probe down)
+  o108 if [#<depthz> LE 0]
+    (MSG, ERROR: Search depth must be positive)
+    (ABORT, Invalid depthz parameter - must be greater than 0)
   o108 endif
   
   ; Calculate distance between probe points
@@ -112,6 +112,9 @@ o<surface_scan> sub
   G0 X#<x0> Y#<y0>        (Move to starting XY position in current WCS)
   G0 Z#<safez>            (Move to safe Z in current WCS)
   
+  ; Calculate probe target Z (current Z minus search depth)
+  #<probe_target_z> = [#<_z> - #<depthz>]
+  
   (MSG, Beginning probe grid scan)
   
   ; ============================================================
@@ -142,12 +145,12 @@ o<surface_scan> sub
       G0 X#<current_x> Y#<current_y>
       
       ; Probe downward with fast feedrate
-      G38.2 Z#<depthz> F#<fast_fr>
+      G38.2 Z#<probe_target_z> F#<fast_fr>
       
       ; If slow feedrate is enabled, retract slightly and probe again slowly
       o230 if [#<slow_fr> GT 0]
         G0 Z[#5063 + #<slow_retract>]    (Retract for slow probe pass)
-        G38.2 Z#<depthz> F#<slow_fr>
+        G38.2 Z#<probe_target_z> F#<slow_fr>
       o230 endif
       
       ; Log the probed point (machine coordinates)

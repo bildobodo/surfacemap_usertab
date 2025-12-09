@@ -30,7 +30,7 @@ The system automatically calculates the spacing between probe points:
 - **Probe Fast Feedrate**: Fast probe feedrate for initial contact (e.g., 100 mm/min, must be > 0)
 - **Probe Slow Feedrate**: Slow probe feedrate for accurate measurement (e.g., 20 mm/min, must be ≥ 0). Set to 0 to disable slow probe pass.
 - **Safe Z**: Safe Z height in current work coordinate system for traversal between probe points
-- **Search Depth**: Maximum downward search distance (must be negative, e.g., -10)
+- **Search Depth**: Maximum downward search distance (must be positive, e.g., 10). Interpreted as distance to probe down in -Z direction.
 
 ### Operation
 
