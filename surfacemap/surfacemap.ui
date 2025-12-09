@@ -1313,6 +1313,9 @@ color: white;
          <property name="filename" stdset="0">
           <string>surface_scan_param_update.ngc</string>
          </property>
+         <property name="args" stdset="0">
+          <string>surface_scan_x0_3050,surface_scan_x1_3051,surface_scan_y0_3052,surface_scan_y1_3053,surface_scan_xprobes_3054,surface_scan_yprobes_3055,probe_fast_fr_3056,probe_slow_fr_3057,surface_scan_safez_3058,surface_scan_depthz_3059</string>
+         </property>
         </widget>
        </item>
       </layout>
