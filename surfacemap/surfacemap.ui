@@ -167,7 +167,7 @@
 }</string>
         </property>
         <property name="text">
-         <string>Grid Size</string>
+         <string>Grid Parameters</string>
         </property>
         <property name="indent">
          <number>10</number>
@@ -201,6 +201,9 @@
             <width>150</width>
             <height>31</height>
            </size>
+          </property>
+          <property name="toolTip">
+           <string>Lower X coord of grid</string>
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
@@ -296,6 +299,9 @@ color: white;
             <height>31</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Upper X coord of grid</string>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
 font: 75 14pt &quot;Bebas Kai&quot;;
@@ -306,7 +312,7 @@ color: white;
            <number>0</number>
           </property>
           <property name="text">
-           <string>height</string>
+           <string>X1</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -317,7 +323,7 @@ color: white;
          </widget>
         </item>
         <item>
-         <widget class="VCPSettingsLineEdit" name="surface_scan_height_3052">
+         <widget class="VCPSettingsLineEdit" name="surface_scan_x1_3051">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -403,6 +409,9 @@ color: white;
             <height>30</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Lower Y coord of grid</string>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
 font: 75 14pt &quot;Bebas Kai&quot;;
@@ -424,7 +433,7 @@ color: white;
          </widget>
         </item>
         <item>
-         <widget class="VCPSettingsLineEdit" name="surface_scan_x0_3051">
+         <widget class="VCPSettingsLineEdit" name="surface_scan_y0_3052">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -503,6 +512,9 @@ color: white;
             <height>30</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Upper Y coord of grid</string>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
 font: 75 14pt &quot;Bebas Kai&quot;;
@@ -513,7 +525,7 @@ color: white;
            <number>0</number>
           </property>
           <property name="text">
-           <string>width</string>
+           <string>Y1</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -524,7 +536,7 @@ color: white;
          </widget>
         </item>
         <item>
-         <widget class="VCPSettingsLineEdit" name="surface_scan_width_3053">
+         <widget class="VCPSettingsLineEdit" name="surface_scan_y1_3053">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -588,6 +600,100 @@ color: white;
          <number>1</number>
         </property>
         <item>
+         <widget class="QLabel" name="label_91">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>150</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+font: 75 14pt &quot;Bebas Kai&quot;;
+color: white;
+}</string>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <property name="text">
+           <string>Num Probes X</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="VCPSettingsLineEdit" name="surface_scan_xprobes_3054">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>bebas kai</family>
+            <pointsize>15</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::ClickFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">VCPSettingsLineEdit {
+    font: 15pt &quot;bebas kai&quot;
+}</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="placeholderText">
+           <string>0.0</string>
+          </property>
+          <property name="rules" stdset="0">
+           <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
+          </property>
+          <property name="settingName" stdset="0">
+           <string>surface-scan.x0</string>
+          </property>
+          <property name="textFormat" stdset="0">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label_87">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -617,7 +723,7 @@ color: white;
            <number>0</number>
           </property>
           <property name="text">
-           <string>grid spacing</string>
+           <string>Num Probes Y</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -628,7 +734,7 @@ color: white;
          </widget>
         </item>
         <item>
-         <widget class="VCPSettingsLineEdit" name="surface_scan_step_3054">
+         <widget class="VCPSettingsLineEdit" name="surface_scan_yprobes_3055">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -682,72 +788,6 @@ color: white;
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="SubCallButton" name="load_from_gcode_btn">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>150</width>
-          <height>27</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>27</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">SubCallButton{
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    color: rgb(238, 238, 236);
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(81, 86, 85), stop:0.489795 rgb(99, 102, 102), stop:0.699799 rgb(85, 88, 94), stop:0.90444 rgb(77, 84, 86), stop:0.160246 rgb(83, 84, 91), stop:1 rgb(109, 115, 118));
-	font: 14pt &quot;Bebas Kai&quot;;
-}
-
-.SubCallButton:disabled {
-    border-color: gray;
-}
-
-.SubCallButton:hover {
-    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                     stop: 0 #A19E9E, stop: 1.0 #5C5959);
-}
-
-.SubCallButton:pressed {
-    background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
-}
-
-.SubCallButton:checked[option=&quot;true&quot;] {
-    background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
-}
-
-.SubCallButton:checked {
-    background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
-}</string>
-        </property>
-        <property name="text">
-         <string>LOAD FROM GCODE</string>
-        </property>
-        <property name="filename" stdset="0">
-         <string>surface_scan_param_update.ngc</string>
-        </property>
-       </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_84">
@@ -840,7 +880,7 @@ color: white;
          </widget>
         </item>
         <item>
-         <widget class="VCPSettingsLineEdit" name="probe_fast_fr_3016">
+         <widget class="VCPSettingsLineEdit" name="probe_fast_fr_3056">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -878,7 +918,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>probe-parameters.probe-fast-fr</string>
+           <string>surface-scan.probe-fast-fr</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -932,7 +972,7 @@ color: white;
          </widget>
         </item>
         <item>
-         <widget class="VCPSettingsLineEdit" name="probe_slow_fr_3015">
+         <widget class="VCPSettingsLineEdit" name="probe_slow_fr_3057">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -970,7 +1010,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>probe-parameters.probe-slow-fr</string>
+           <string>surface-scan.probe-slow-fr</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -1001,6 +1041,9 @@ color: white;
             <height>31</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Z coordinate of retraction and traversal</string>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
 font: 75 14pt &quot;Bebas Kai&quot;;
@@ -1022,7 +1065,7 @@ color: white;
          </widget>
         </item>
         <item>
-         <widget class="VCPSettingsLineEdit" name="surface_scan_height_3053">
+         <widget class="VCPSettingsLineEdit" name="surface_scan_safez_3058">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1113,7 +1156,7 @@ color: white;
          </widget>
         </item>
         <item>
-         <widget class="VCPSettingsLineEdit" name="surface_scan_x0_3054">
+         <widget class="VCPSettingsLineEdit" name="surface_scan_depthz_3059">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1265,7 +1308,7 @@ color: white;
 }</string>
          </property>
          <property name="text">
-          <string>UPDATE PROBE PARAMS</string>
+          <string>STORE PROBE PARAMS</string>
          </property>
          <property name="filename" stdset="0">
           <string>surface_scan_param_update.ngc</string>
@@ -1338,7 +1381,7 @@ color: white;
        <string>Scan Surface</string>
       </property>
       <property name="filename" stdset="0">
-       <string>surface_test.ngc</string>
+       <string>surface_scan.ngc</string>
       </property>
      </widget>
     </item>
@@ -1377,11 +1420,11 @@ color: white;
     <string>[{&quot;name&quot;: &quot;mix_extents&quot;, &quot;property&quot;: &quot;Text&quot;, &quot;expression&quot;: &quot;f\&quot;{ch[0]}\&quot;&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;gcode_properties:min_extents&quot;, &quot;trigger&quot;: true}]}]</string>
    </property>
   </widget>
-  <widget class="GCodeProperties" name="gcodeproperties">
+  <widget class="GCodeProperties" name="gcodeproperties" native="true">
    <property name="geometry">
     <rect>
-     <x>700</x>
-     <y>120</y>
+     <x>610</x>
+     <y>70</y>
      <width>691</width>
      <height>441</height>
     </rect>
@@ -1416,7 +1459,7 @@ color: white;
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../probe_basic/src/probe_basic/probe_basic.qrc"/>
+  <include location="../../probe_basic/src/probe_basic/probe_basic.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1436,7 +1479,7 @@ color: white;
    </hints>
   </connection>
   <connection>
-   <sender>surface_scan_height_3052</sender>
+   <sender>surface_scan_x1_3051</sender>
    <signal>textChanged(QString)</signal>
    <receiver>update_surface_scan_params</receiver>
    <slot>click()</slot>
@@ -1452,7 +1495,7 @@ color: white;
    </hints>
   </connection>
   <connection>
-   <sender>surface_scan_width_3053</sender>
+   <sender>surface_scan_y1_3053</sender>
    <signal>textChanged(QString)</signal>
    <receiver>update_surface_scan_params</receiver>
    <slot>click()</slot>
@@ -1468,7 +1511,7 @@ color: white;
    </hints>
   </connection>
   <connection>
-   <sender>surface_scan_step_3054</sender>
+   <sender>surface_scan_yprobes_3055</sender>
    <signal>textChanged(QString)</signal>
    <receiver>update_surface_scan_params</receiver>
    <slot>click()</slot>
@@ -1484,7 +1527,7 @@ color: white;
    </hints>
   </connection>
   <connection>
-   <sender>probe_fast_fr_3016</sender>
+   <sender>probe_fast_fr_3056</sender>
    <signal>textChanged(QString)</signal>
    <receiver>update_surface_scan_params</receiver>
    <slot>click()</slot>
@@ -1500,7 +1543,7 @@ color: white;
    </hints>
   </connection>
   <connection>
-   <sender>surface_scan_height_3053</sender>
+   <sender>surface_scan_safez_3058</sender>
    <signal>textChanged(QString)</signal>
    <receiver>update_surface_scan_params</receiver>
    <slot>click()</slot>
@@ -1516,7 +1559,7 @@ color: white;
    </hints>
   </connection>
   <connection>
-   <sender>surface_scan_x0_3054</sender>
+   <sender>surface_scan_depthz_3059</sender>
    <signal>textChanged(QString)</signal>
    <receiver>update_surface_scan_params</receiver>
    <slot>click()</slot>
@@ -1532,7 +1575,7 @@ color: white;
    </hints>
   </connection>
   <connection>
-   <sender>probe_slow_fr_3015</sender>
+   <sender>probe_slow_fr_3057</sender>
    <signal>textChanged(QString)</signal>
    <receiver>update_surface_scan_params</receiver>
    <slot>click()</slot>
@@ -1548,7 +1591,7 @@ color: white;
    </hints>
   </connection>
   <connection>
-   <sender>surface_scan_x0_3051</sender>
+   <sender>surface_scan_y0_3052</sender>
    <signal>textChanged(QString)</signal>
    <receiver>update_surface_scan_params</receiver>
    <slot>click()</slot>
@@ -1560,6 +1603,22 @@ color: white;
     <hint type="destinationlabel">
      <x>300</x>
      <y>518</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>surface_scan_xprobes_3054</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>update_surface_scan_params</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>209</x>
+     <y>264</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>510</y>
     </hint>
    </hints>
   </connection>
