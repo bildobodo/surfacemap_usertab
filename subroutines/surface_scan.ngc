@@ -27,8 +27,8 @@ o<surface_scan> sub
   G90                     (Absolute positioning)
   G94                     (Feed per minute mode)
   G40                     (Cancel cutter compensation)
-  G49                     (Cancel tool length offset)
   G80                     (Cancel canned cycles)
+  ; Note: G49 NOT used - tool length offset must remain active for probe
   
   ; ============================================================
   ; Validate parameters and calculate probe point spacing
@@ -69,7 +69,7 @@ o<surface_scan> sub
   ; ============================================================
   #<wco_x> = [#<_abs_x> - #<_x>]
   #<wco_y> = [#<_abs_y> - #<_y>]
-  #<wco_z> = [#<_abs_z> - #<_z>]
+  #<wco_z> = [#<_abs_z> - #<_z> - #5403]  (Include tool length offset for probe)
   
   ; ============================================================
   ; Open probe results file and write header
