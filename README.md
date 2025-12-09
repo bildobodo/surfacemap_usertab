@@ -18,12 +18,13 @@ Define the rectangular grid area to be probed:
 - **x1**: Upper X coordinate of the grid (end position)
 - **y0**: Lower Y coordinate of the grid (start position)
 - **y1**: Upper Y coordinate of the grid (end position)
-- **Num Probes X**: Number of probe points along the X axis (minimum 2)
-- **Num Probes Y**: Number of probe points along the Y axis (minimum 2)
+- **Num Probes X**: Number of probe points along the X axis (minimum 1; use 2+ for a grid)
+- **Num Probes Y**: Number of probe points along the Y axis (minimum 1; use 2+ for a grid)
 
 The system automatically calculates the spacing between probe points:
-- X spacing = (x1 - x0) / (Num Probes X - 1)
-- Y spacing = (y1 - y0) / (Num Probes Y - 1)
+- X spacing = (x1 - x0) / (Num Probes X - 1) for Num Probes X > 1
+- Y spacing = (y1 - y0) / (Num Probes Y - 1) for Num Probes Y > 1
+- When Num Probes = 1, spacing is 0 (single point probe)
 
 ### Probing Settings
 
