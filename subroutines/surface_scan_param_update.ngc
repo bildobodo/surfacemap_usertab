@@ -1,16 +1,31 @@
 o<surface_scan_param_update> sub
-  (MSG, surface_scan_param_update.ngc)
-  (DEBUG, parameter 1 is [#1])  
-  #<surface_scan_x0_3050> = #1
-  #<surface_scan_x0_3051> = #2
-  #<surface_scan_height_3052> = #3
-  #<surface_scan_width_3053> = #4
-  #<surface_scan_step_3054> = #5
+  (MSG, surface_scan_param_update.ngc - Storing surface scan parameters)
+  (Parameters received: x0=#1 x1=#2 y0=#3 y1=#4 xprobes=#5 yprobes=#6 fast_fr=#7 slow_fr=#8 safez=#9 depthz=#10)
   
-  #3050 = #<surface_scan_x0_3050>  
-  #3051 = #<surface_scan_x0_3051>  
-  #3052 = #<surface_scan_height_3052>  
-  #3053 = #<surface_scan_width_3053>  
-  #3054 = #<surface_scan_step_3054>
+  ; Store parameters into local variables for clarity
+  #<x0> = #1
+  #<x1> = #2
+  #<y0> = #3
+  #<y1> = #4
+  #<xprobes> = #5
+  #<yprobes> = #6
+  #<fast_fr> = #7
+  #<slow_fr> = #8
+  #<safez> = #9
+  #<depthz> = #10
+  
+  ; Write to persistent userspace variables (3050-3059)
+  #3050 = #<x0>
+  #3051 = #<x1>
+  #3052 = #<y0>
+  #3053 = #<y1>
+  #3054 = #<xprobes>
+  #3055 = #<yprobes>
+  #3056 = #<fast_fr>
+  #3057 = #<slow_fr>
+  #3058 = #<safez>
+  #3059 = #<depthz>
+  
+  (MSG, Parameters stored successfully)
 o<surface_scan_param_update> endsub
 M2

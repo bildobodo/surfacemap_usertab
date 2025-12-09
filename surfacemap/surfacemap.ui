@@ -369,7 +369,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.height</string>
+           <string>surface-scan.x1</string>
           </property>
          </widget>
         </item>
@@ -582,7 +582,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.width</string>
+           <string>surface-scan.y1</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -686,7 +686,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.x0</string>
+           <string>surface-scan.xprobes</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -780,7 +780,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.x0</string>
+           <string>surface-scan.yprobes</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -1111,7 +1111,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.height</string>
+           <string>surface-scan.safez</string>
           </property>
          </widget>
         </item>
@@ -1202,7 +1202,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.x0</string>
+           <string>surface-scan.depthz</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -1387,23 +1387,72 @@ color: white;
     </item>
     <item>
      <widget class="HalButton" name="halbutton">
-      <property name="font">
-       <font>
-        <family>BebasKai</family>
-        <pointsize>15</pointsize>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string>Compensation map enable</string>
-      </property>
-      <property name="checkable">
-       <bool>true</bool>
-      </property>
-      <property name="pinBaseName" stdset="0">
-       <string>halbutton_compensation_enable</string>
-      </property>
-     </widget>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>BebasKai</family>
+         <pointsize>15</pointsize>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">HalButton {
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(213, 218, 216, 255), stop:0.169312 rgba(82, 82, 83, 255), stop:0.328042 rgba(72, 70, 73, 255), stop:0.492063 rgba(78, 77, 79, 255), stop:0.703704 rgba(72, 70, 73, 255), stop:0.86 rgba(82, 82, 83, 255), stop:1 rgba(213, 218, 216, 255));
+    font-family: &quot;BebasKai&quot;;
+    font-size: 15pt;
+}
+
+HalButton:disabled {
+    border-color: gray;
+    color: gray;
+}
+
+HalButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #A19E9E, stop: 1.0 #5C5959);
+}
+
+HalButton:pressed {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 140, 0, 255), stop:0.544974 rgba(255, 150, 30, 255), stop:1 rgba(255, 180, 80, 255));
+}
+
+HalButton:checked {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 238, 85, 255), stop:0.544974 rgba(90, 239, 91, 255), stop:1 rgba(126, 243, 135, 255));
+    color: black;
+    font-weight: bold;
+}</string>
+       </property>
+       <property name="text">
+        <string>Compensation Enable</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="pinBaseName" stdset="0">
+        <string>halbutton_compensation_enable</string>
+       </property>
+      </widget>
     </item>
    </layout>
   </widget>
