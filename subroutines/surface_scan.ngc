@@ -16,6 +16,11 @@ o<surface_scan> sub
   #<depthz> = #3059       (Maximum search depth - negative value)
   
   ; ============================================================
+  ; Configuration constants
+  ; ============================================================
+  #<slow_retract> = 0.1   (Retract distance before slow probe pass)
+  
+  ; ============================================================
   ; Get into predictable state
   ; ============================================================
   M64 P0                  (Disable compensation)
@@ -26,24 +31,36 @@ o<surface_scan> sub
   G80                     (Cancel canned cycles)
   
   ; ============================================================
-  ; Calculate probe point spacing
+  ; Validate parameters and calculate probe point spacing
   ; ============================================================
+  ; Ensure minimum probe counts
+  o100 if [#<xprobes> LT 1]
+    (MSG, ERROR: Number of X probes must be at least 1)
+    (ABORT, Invalid xprobes parameter)
+  o100 endif
+  
+  o101 if [#<yprobes> LT 1]
+    (MSG, ERROR: Number of Y probes must be at least 1)
+    (ABORT, Invalid yprobes parameter)
+  o101 endif
+  
   ; Calculate distance between probe points
-  ; For N points, we have N-1 intervals
+  ; For N points, we have N-1 intervals (when N > 1)
+  ; For N=1, spacing is 0 (single point)
   #<x_range> = [#<x1> - #<x0>]
   #<y_range> = [#<y1> - #<y0>]
   
-  o100 if [#<xprobes> GT 1]
+  o102 if [#<xprobes> GT 1]
     #<x_spacing> = [#<x_range> / [#<xprobes> - 1]]
-  o100 else
+  o102 else
     #<x_spacing> = 0
-  o100 endif
+  o102 endif
   
-  o101 if [#<yprobes> GT 1]
+  o103 if [#<yprobes> GT 1]
     #<y_spacing> = [#<y_range> / [#<yprobes> - 1]]
-  o101 else
+  o103 else
     #<y_spacing> = 0
-  o101 endif
+  o103 endif
   
   (MSG, Grid: X[#<x0> to #<x1>] Y[#<y0> to #<y1>], Spacing: X#<x_spacing> Y#<y_spacing>)
   
@@ -101,7 +118,7 @@ o<surface_scan> sub
       
       ; If slow feedrate is enabled, retract slightly and probe again slowly
       o230 if [#<slow_fr> GT 0]
-        G0 Z[#5063 + 0.1]    (Retract 0.1 units)
+        G0 Z[#5063 + #<slow_retract>]    (Retract for slow probe pass)
         G38.2 Z#<depthz> F#<slow_fr>
       o230 endif
       
