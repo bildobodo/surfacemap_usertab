@@ -15,23 +15,22 @@ This is a user tab to simplify surface mapping and compensation for Probe Basic 
 Define the rectangular grid area to be probed:
 
 - **x0**: Lower X coordinate of the grid (start position)
-- **x1**: Upper X coordinate of the grid (end position)
+- **x1**: Upper X coordinate of the grid (end position, must be > x0)
 - **y0**: Lower Y coordinate of the grid (start position)
-- **y1**: Upper Y coordinate of the grid (end position)
-- **Num Probes X**: Number of probe points along the X axis (minimum 1; use 2+ for a grid)
-- **Num Probes Y**: Number of probe points along the Y axis (minimum 1; use 2+ for a grid)
+- **y1**: Upper Y coordinate of the grid (end position, must be > y0)
+- **Num Probes X**: Number of probe points along the X axis (minimum 2, must be an integer)
+- **Num Probes Y**: Number of probe points along the Y axis (minimum 2, must be an integer)
 
 The system automatically calculates the spacing between probe points:
-- X spacing = (x1 - x0) / (Num Probes X - 1) for Num Probes X > 1
-- Y spacing = (y1 - y0) / (Num Probes Y - 1) for Num Probes Y > 1
-- When Num Probes = 1, spacing is 0 (single point probe)
+- X spacing = (x1 - x0) / (Num Probes X - 1)
+- Y spacing = (y1 - y0) / (Num Probes Y - 1)
 
 ### Probing Settings
 
-- **Probe Fast Feedrate**: Fast probe feedrate for initial contact (e.g., 100 mm/min)
-- **Probe Slow Feedrate**: Slow probe feedrate for accurate measurement (e.g., 20 mm/min). Set to 0 to disable slow probe pass.
+- **Probe Fast Feedrate**: Fast probe feedrate for initial contact (e.g., 100 mm/min, must be > 0)
+- **Probe Slow Feedrate**: Slow probe feedrate for accurate measurement (e.g., 20 mm/min, must be ≥ 0). Set to 0 to disable slow probe pass.
 - **Safe Z**: Safe Z height in current work coordinate system for traversal between probe points
-- **Search Depth**: Maximum downward search distance (typically a negative value, e.g., -10)
+- **Search Depth**: Maximum downward search distance (must be negative, e.g., -10)
 
 ### Operation
 

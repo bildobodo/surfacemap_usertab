@@ -33,34 +33,62 @@ o<surface_scan> sub
   ; ============================================================
   ; Validate parameters and calculate probe point spacing
   ; ============================================================
-  ; Ensure minimum probe counts
-  o100 if [#<xprobes> LT 1]
-    (MSG, ERROR: Number of X probes must be at least 1)
-    (ABORT, Invalid xprobes parameter)
+  ; Validate probe counts - must be at least 2 for a grid
+  o100 if [#<xprobes> LT 2]
+    (MSG, ERROR: Number of X probes must be at least 2)
+    (ABORT, Invalid xprobes parameter - minimum is 2)
   o100 endif
   
-  o101 if [#<yprobes> LT 1]
-    (MSG, ERROR: Number of Y probes must be at least 1)
-    (ABORT, Invalid yprobes parameter)
+  o101 if [#<yprobes> LT 2]
+    (MSG, ERROR: Number of Y probes must be at least 2)
+    (ABORT, Invalid yprobes parameter - minimum is 2)
   o101 endif
   
-  ; Calculate distance between probe points
-  ; For N points, we have N-1 intervals (when N > 1)
-  ; For N=1, spacing is 0 (single point)
-  #<x_range> = [#<x1> - #<x0>]
-  #<y_range> = [#<y1> - #<y0>]
-  
-  o102 if [#<xprobes> GT 1]
-    #<x_spacing> = [#<x_range> / [#<xprobes> - 1]]
-  o102 else
-    #<x_spacing> = 0
+  ; Validate probe counts are integers (check for fractional part)
+  o102 if [#<xprobes> NE FIX[#<xprobes>]]
+    (MSG, ERROR: Number of X probes must be an integer)
+    (ABORT, Invalid xprobes parameter - must be whole number)
   o102 endif
   
-  o103 if [#<yprobes> GT 1]
-    #<y_spacing> = [#<y_range> / [#<yprobes> - 1]]
-  o103 else
-    #<y_spacing> = 0
+  o103 if [#<yprobes> NE FIX[#<yprobes>]]
+    (MSG, ERROR: Number of Y probes must be an integer)
+    (ABORT, Invalid yprobes parameter - must be whole number)
   o103 endif
+  
+  ; Validate grid bounds
+  o104 if [#<x1> LE #<x0>]
+    (MSG, ERROR: X1 must be greater than X0)
+    (ABORT, Invalid grid bounds - X1 <= X0)
+  o104 endif
+  
+  o105 if [#<y1> LE #<y0>]
+    (MSG, ERROR: Y1 must be greater than Y0)
+    (ABORT, Invalid grid bounds - Y1 <= Y0)
+  o105 endif
+  
+  ; Validate feedrates
+  o106 if [#<fast_fr> LE 0]
+    (MSG, ERROR: Fast feedrate must be greater than 0)
+    (ABORT, Invalid fast_fr parameter)
+  o106 endif
+  
+  o107 if [#<slow_fr> LT 0]
+    (MSG, ERROR: Slow feedrate must be 0 or positive)
+    (ABORT, Invalid slow_fr parameter)
+  o107 endif
+  
+  ; Validate depth is negative
+  o108 if [#<depthz> GE 0]
+    (MSG, ERROR: Search depth must be negative)
+    (ABORT, Invalid depthz parameter - must be below current position)
+  o108 endif
+  
+  ; Calculate distance between probe points
+  ; For N points, we have N-1 intervals
+  #<x_range> = [#<x1> - #<x0>]
+  #<y_range> = [#<y1> - #<y0>]
+  #<x_spacing> = [#<x_range> / [#<xprobes> - 1]]
+  #<y_spacing> = [#<y_range> / [#<yprobes> - 1]]
   
   (MSG, Grid: X[#<x0> to #<x1>] Y[#<y0> to #<y1>], Spacing: X#<x_spacing> Y#<y_spacing>)
   
