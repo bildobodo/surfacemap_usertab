@@ -4,10 +4,11 @@ This is a user tab to simplify surface mapping and compensation for Probe Basic 
 
 ## Installation
 
-1. Install compensation component by scottalford75: https://github.com/scottalford75/LinuxCNC-3D-Printing/tree/master/compensation
-2. Copy the `surfacemap` directory into `~/linuxcnc/configs/yourconfig/user_tabs/`
-3. Copy contents of `subroutines` folder into `~/linuxcnc/configs/yourconfig/subroutines/`
-4. Add HAL connections to your postgui HAL file (see HAL Configuration section below)
+1. Install compensation component by scottalford75: https://github.com/scottalford75/LinuxCNC-3D-Printing/tree/master/compensation.
+2. Check the default parameters in compensation.py. You may want to change resolution or polling rate in your hal file.
+3. Copy the `surfacemap` directory into `~/linuxcnc/configs/yourconfig/user_tabs/`
+4. Copy contents of `subroutines` folder into `~/linuxcnc/configs/yourconfig/subroutines/`
+5. Add HAL connections to your postgui HAL file (see HAL Configuration section below)
 
 ## Usage
 
@@ -28,10 +29,10 @@ The system automatically calculates the spacing between probe points:
 
 ### Probing Settings
 
-- **Probe Fast Feedrate**: Fast probe feedrate for initial contact (e.g., 100 mm/min, must be > 0)
-- **Probe Slow Feedrate**: Slow probe feedrate for accurate measurement (e.g., 20 mm/min, must be ≥ 0). Set to 0 to disable slow probe pass.
+- **Probe Fast Feedrate**: Fast probe feedrate for initial contact (e.g., 3 in/min, must be > 0)
+- **Probe Slow Feedrate**: Slow probe feedrate for accurate measurement (e.g., 1 in/min, must be ≥ 0). Set to 0 to disable slow probe pass.
 - **Safe Z**: Safe Z height in current work coordinate system for traversal between probe points
-- **Search Depth**: Maximum downward search distance (must be positive, e.g., 10). Interpreted as distance to probe down in -Z direction.
+- **Search Depth**: Maximum downward search distance (must be positive, e.g., 0.75). Interpreted as distance to probe down in -Z direction.
 
 ### Operation
 
@@ -44,7 +45,7 @@ The system automatically calculates the spacing between probe points:
    - Move to machine Z0 for safety
    - Move to the starting position (x0, y0)
    - Probe in a snaking pattern (left-to-right, then right-to-left alternating)
-   - Store results in `probe-results.txt` (raw X Y Z data, compatible with `np.loadtxt`)
+   - Store results in `probe-results.txt
 6. Click **"Compensation Enable"** to enable/disable compensation
    - Button turns **green** when compensation is enabled
    - Button is **gray** when compensation is disabled
@@ -63,7 +64,7 @@ The compensation enable button creates HAL pins that need to be connected in you
 ### Automatic HAL Pins Created
 
 The button with `pinBaseName = "halbutton_compensation_enable"` automatically creates:
-- `qtpyvcp.halbutton_compensation_enable.on` - HAL_BIT OUT pin (True when button is checked)
+- `qtpyvcp.halbutton_compensation_enable.checked` - HAL_BIT OUT pin (True when button is checked)
 
 ### Required HAL Connections
 
@@ -71,38 +72,10 @@ Add the following to your `POSTGUI_HALFILE` (e.g., `custom_postgui.hal`):
 
 ```hal
 # Connect compensation enable button to compensation component
-net compensation-enable qtpyvcp.halbutton_compensation_enable.on => compensation.enable-in
-
-# Read compensation status back to update button state (optional but recommended)
-net compensation-status compensation.enable-out => qtpyvcp.halbutton_compensation_enable.checked-in
+net compensation-on <= qtpyvcp.halbutton_compensation_enable.checked
 ```
 
-**Explanation:**
-- First line: Button output controls the compensation component's enable input
-- Second line: Compensation component's status feeds back to button for visual state (green when enabled)
-
-**Note:** The signal name `compensation-on` in your HAL file is your choice. The example above uses `compensation-enable` and `compensation-status` as signal names.
-
-## Technical Details
-
-### Probing Pattern
-
-The system uses a snaking pattern to minimize travel time:
-```
-Row 0: x0 → x1 (left to right)
-Row 1: x1 → x0 (right to left)
-Row 2: x0 → x1 (left to right)
-...
-```
-
-### Probe Results File
-
-Results are stored in `probe-results.txt` as raw numerical data compatible with `np.loadtxt`:
-- Each line contains: X Y Z coordinates (space-separated)
-- No header data (for direct loading with numpy)
-- Coordinates are in the current work coordinate system
-
-### Parameter Storage
+### Parameters
 
 Parameters are stored in LinuxCNC userspace variables:
 - #3050 = x0
@@ -117,11 +90,4 @@ Parameters are stored in LinuxCNC userspace variables:
 - #3059 = depthz (search depth)
 
 ## Safety Notes
-
-⚠️ **Always verify parameters before scanning:**
-- Ensure the probe will not crash into fixtures or the part
-- Verify safe Z is high enough to clear all obstacles
-- Ensure search depth won't cause collisions
-- Test with a small grid first
-
-⚠️ **The machine will move in G53 (machine coordinates) for Z-axis safety moves**
+Move your z axis into the middle of its travel when enabling or disabling compensation; it triggers a move that could cause a crash if you're close to a limit or the workpiece.
