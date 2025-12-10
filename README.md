@@ -36,17 +36,26 @@ The system automatically calculates the spacing between probe points:
 
 1. **Home all axes** before starting
 2. **Set your work coordinate system** (the scan operates in the currently active WCS)
-3. **Fill in all parameters** - they will be automatically stored when changed
-4. Click **"Scan Surface"** to start the probing operation
-5. The scan will:
+3. **Fill in all parameters** - they will be automatically written to LinuxCNC variables when you finish editing each field
+4. Optionally click **"STORE PROBE PARAMS"** button to manually update all parameters
+5. Click **"Scan Surface"** to start the probing operation
+6. The scan will:
    - Disable compensation
    - Move to machine Z0 for safety
    - Move to the starting position (x0, y0)
    - Probe in a snaking pattern (left-to-right, then right-to-left alternating)
    - Store results in `probe-results.txt`
-6. Click **"Compensation Enable"** to enable/disable compensation
+7. Click **"Compensation Enable"** to enable/disable compensation
    - Button turns **green** when compensation is enabled
    - Button is **gray** when compensation is disabled
+
+### How Parameters Are Stored
+
+Parameters are written directly to LinuxCNC numbered variables (#3050-#3059) using MDI commands:
+- Values are automatically written when you finish editing each input field
+- The "STORE PROBE PARAMS" button can be used to manually update all parameters at once
+- Parameters are persistent and saved to the LinuxCNC var file
+- The surface_scan.ngc subroutine reads these parameters directly from the numbered variables
 
 ## Technical Details
 

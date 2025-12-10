@@ -1250,7 +1250,7 @@ color: white;
         <number>0</number>
        </property>
        <item>
-        <widget class="SubCallButton" name="update_surface_scan_params">
+        <widget class="QPushButton" name="update_surface_scan_params">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -1273,7 +1273,7 @@ color: white;
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="styleSheet">
-          <string notr="true">SubCallButton{
+          <string notr="true">QPushButton{
     border-style: solid;
     border-color: black;
     border-width: 2px;
@@ -1286,35 +1286,29 @@ color: white;
 	font: 14pt &quot;Bebas Kai&quot;;
 }
 
-.SubCallButton:disabled {
+QPushButton:disabled {
     border-color: gray;
 }
 
-.SubCallButton:hover {
+QPushButton:hover {
     background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                      stop: 0 #A19E9E, stop: 1.0 #5C5959);
 }
 
-.SubCallButton:pressed {
+QPushButton:pressed {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }
 
-.SubCallButton:checked[option=&quot;true&quot;] {
+QPushButton:checked[option=&quot;true&quot;] {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }
 
-.SubCallButton:checked {
+QPushButton:checked {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }</string>
          </property>
          <property name="text">
           <string>STORE PROBE PARAMS</string>
-         </property>
-         <property name="filename" stdset="0">
-          <string>surface_scan_param_update.ngc</string>
-         </property>
-         <property name="args" stdset="0">
-          <string>surface_scan_x0_3050,surface_scan_x1_3051,surface_scan_y0_3052,surface_scan_y1_3053,surface_scan_xprobes_3054,surface_scan_yprobes_3055,probe_fast_fr_3056,probe_slow_fr_3057,surface_scan_safez_3058,surface_scan_depthz_3059</string>
          </property>
         </widget>
        </item>
@@ -1359,24 +1353,24 @@ color: white;
     font-size: 15pt;
 }
 
-.SubCallButton:disabled {
+QPushButton:disabled {
     border-color: gray;
 }
 
-.SubCallButton:hover {
+QPushButton:hover {
     background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                      stop: 0 #A19E9E, stop: 1.0 #5C5959);
 }
 
-.SubCallButton:pressed {
+QPushButton:pressed {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }
 
-.SubCallButton:checked[option=&quot;true&quot;] {
+QPushButton:checked[option=&quot;true&quot;] {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }
 
-.SubCallButton:checked {
+QPushButton:checked {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }</string>
       </property>
