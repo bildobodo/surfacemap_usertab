@@ -41,17 +41,17 @@ class UserTab(QWidget):
     def update_parameters(self):
         """Write GUI input values to LinuxCNC numbered parameters using issue_mdi"""
         try:
-            # Get values from input fields, using 0.0 as default if empty
+            # Get values from input fields, using 0.0 as default if empty (LinuxCNC default)
             x0 = float(self.surface_scan_x0_3050.text() or 0.0)
             x1 = float(self.surface_scan_x1_3051.text() or 0.0)
             y0 = float(self.surface_scan_y0_3052.text() or 0.0)
             y1 = float(self.surface_scan_y1_3053.text() or 0.0)
-            xprobes = float(self.surface_scan_xprobes_3054.text() or 2.0)
-            yprobes = float(self.surface_scan_yprobes_3055.text() or 2.0)
-            fast_fr = float(self.probe_fast_fr_3056.text() or 100.0)
-            slow_fr = float(self.probe_slow_fr_3057.text() or 20.0)
-            safez = float(self.surface_scan_safez_3058.text() or 5.0)
-            depthz = float(self.surface_scan_depthz_3059.text() or 10.0)
+            xprobes = float(self.surface_scan_xprobes_3054.text() or 0.0)
+            yprobes = float(self.surface_scan_yprobes_3055.text() or 0.0)
+            fast_fr = float(self.probe_fast_fr_3056.text() or 0.0)
+            slow_fr = float(self.probe_slow_fr_3057.text() or 0.0)
+            safez = float(self.surface_scan_safez_3058.text() or 0.0)
+            depthz = float(self.surface_scan_depthz_3059.text() or 0.0)
             
             # Write to LinuxCNC numbered parameters #3050-#3059
             # These are persistent parameters that will be saved to the var file
