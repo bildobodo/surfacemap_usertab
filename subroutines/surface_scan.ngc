@@ -1,6 +1,4 @@
 o<surface_scan> sub
-  (MSG, Starting Surface Scan)
-  
   ; ============================================================
   ; Read parameters from userspace variables
   ; ============================================================
@@ -90,7 +88,7 @@ o<surface_scan> sub
   #<x_spacing> = [#<x_range> / [#<xprobes> - 1]]
   #<y_spacing> = [#<y_range> / [#<yprobes> - 1]]
   
-  (MSG, Grid: X[#<x0> to #<x1>] Y[#<y0> to #<y1>], Spacing: X#<x_spacing> Y#<y_spacing>)
+  (DEBUG, Grid: X[#<x0> to #<x1>] Y[#<y0> to #<y1>], Spacing: X#<x_spacing> Y#<y_spacing>)
   
   ; ============================================================
   ; Open probe results file (no header for np.loadtxt compatibility)
@@ -106,8 +104,6 @@ o<surface_scan> sub
   
   ; Calculate probe target Z (current Z minus search depth)
   #<probe_target_z> = [#<_z> - #<depthz>]
-  
-  (MSG, Beginning probe grid scan)
   
   ; ============================================================
   ; Probe grid with snaking pattern
