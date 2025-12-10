@@ -10,6 +10,15 @@ This is a user tab to simplify surface mapping and compensation for Probe Basic 
 4. Copy contents of `subroutines` folder into `~/linuxcnc/configs/yourconfig/subroutines/`
 5. Add HAL connections to your postgui HAL file (see HAL Configuration section below)
 
+### HAL Configuration
+
+The compensation enable button creates HAL pins that need to be connected in your postgui HAL file. Add the following to your `POSTGUI_HALFILE` (e.g., `probe_basic_postgui.hal`):
+
+```hal
+# Connect compensation enable button to compensation component
+net compensation-on <= qtpyvcp.halbutton_compensation_enable.checked
+```
+
 ## Usage
 
 ### Grid Parameters
@@ -57,23 +66,6 @@ Parameters are written directly to LinuxCNC numbered variables (#3050-#3059) usi
 - Parameters are persistent and saved to the LinuxCNC var file
 - The surface_scan.ngc subroutine reads these parameters directly from the numbered variables
 
-## HAL Configuration
-
-The compensation enable button creates HAL pins that need to be connected in your postgui HAL file.
-
-### Automatic HAL Pins Created
-
-The button with `pinBaseName = "halbutton_compensation_enable"` automatically creates:
-- `qtpyvcp.halbutton_compensation_enable.checked` - HAL_BIT OUT pin (True when button is checked)
-
-### Required HAL Connections
-
-Add the following to your `POSTGUI_HALFILE` (e.g., `probe_basic_postgui.hal`):
-
-```hal
-# Connect compensation enable button to compensation component
-net compensation-on <= qtpyvcp.halbutton_compensation_enable.checked
-```
 
 ### Parameters
 
