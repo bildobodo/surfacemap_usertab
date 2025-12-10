@@ -93,17 +93,9 @@ o<surface_scan> sub
   (MSG, Grid: X[#<x0> to #<x1>] Y[#<y0> to #<y1>], Spacing: X#<x_spacing> Y#<y_spacing>)
   
   ; ============================================================
-  ; Calculate work coordinate offsets for logging
-  ; ============================================================
-  #<wco_x> = [#<_abs_x> - #<_x>]
-  #<wco_y> = [#<_abs_y> - #<_y>]
-  #<wco_z> = [#<_abs_z> - #<_z> - #5403]  (Include tool length offset for probe)
-  
-  ; ============================================================
-  ; Open probe results file and write header
+  ; Open probe results file (no header for np.loadtxt compatibility)
   ; ============================================================
   (LOGOPEN,probe-results.txt)
-  (LOG,WCO #<wco_x> #<wco_y> #<wco_z>)
   
   ; ============================================================
   ; Move to safe position

@@ -34,9 +34,6 @@ class UserTab(QWidget):
         self.probe_slow_fr_3057.editingFinished.connect(self.update_parameters)
         self.surface_scan_safez_3058.editingFinished.connect(self.update_parameters)
         self.surface_scan_depthz_3059.editingFinished.connect(self.update_parameters)
-        
-        # Also connect the button to update parameters
-        self.update_surface_scan_params.clicked.connect(self.update_parameters)
     
     def update_parameters(self):
         """Write GUI input values to LinuxCNC numbered parameters using issue_mdi"""

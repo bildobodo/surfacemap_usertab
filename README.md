@@ -38,15 +38,14 @@ The system automatically calculates the spacing between probe points:
 1. **Home all axes** before starting
 2. **Set your work coordinate system** (the scan operates in the currently active WCS)
 3. **Fill in all parameters** - they will be automatically written to LinuxCNC variables when you finish editing each field
-4. Optionally click **"STORE PROBE PARAMS"** button to manually update all parameters
-5. Click **"Scan Surface"** to start the probing operation
-6. The scan will:
+4. Click **"Scan Surface"** to start the probing operation
+5. The scan will:
    - Disable compensation
    - Move to machine Z0 for safety
    - Move to the starting position (x0, y0)
    - Probe in a snaking pattern (left-to-right, then right-to-left alternating)
-   - Store results in `probe-results.txt`
-7. Click **"Compensation Enable"** to enable/disable compensation
+   - Store results in `probe-results.txt` (raw X Y Z data, compatible with `np.loadtxt`)
+6. Click **"Compensation Enable"** to enable/disable compensation
    - Button turns **green** when compensation is enabled
    - Button is **gray** when compensation is disabled
 
@@ -54,7 +53,6 @@ The system automatically calculates the spacing between probe points:
 
 Parameters are written directly to LinuxCNC numbered variables (#3050-#3059) using MDI commands:
 - Values are automatically written when you finish editing each input field
-- The "STORE PROBE PARAMS" button can be used to manually update all parameters at once
 - Parameters are persistent and saved to the LinuxCNC var file
 - The surface_scan.ngc subroutine reads these parameters directly from the numbered variables
 
@@ -99,9 +97,10 @@ Row 2: x0 → x1 (left to right)
 
 ### Probe Results File
 
-Results are stored in `probe-results.txt` with:
-- Work Coordinate Offsets (WCO) in the header
-- Each probed point in machine coordinates (X, Y, Z)
+Results are stored in `probe-results.txt` as raw numerical data compatible with `np.loadtxt`:
+- Each line contains: X Y Z coordinates (space-separated)
+- No header data (for direct loading with numpy)
+- Coordinates are in the current work coordinate system
 
 ### Parameter Storage
 
