@@ -369,7 +369,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.height</string>
+           <string>surface-scan.x1</string>
           </property>
          </widget>
         </item>
@@ -582,7 +582,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.width</string>
+           <string>surface-scan.y1</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -686,7 +686,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.x0</string>
+           <string>surface-scan.xprobes</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -780,7 +780,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.x0</string>
+           <string>surface-scan.yprobes</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -1111,7 +1111,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.height</string>
+           <string>surface-scan.safez</string>
           </property>
          </widget>
         </item>
@@ -1202,7 +1202,7 @@ color: white;
            <string>[{&quot;name&quot;: &quot;enable&quot;, &quot;property&quot;: &quot;Enable&quot;, &quot;expression&quot;: &quot;True if ch[0] else False&quot;, &quot;channels&quot;: [{&quot;url&quot;: &quot;status:all_axes_homed&quot;, &quot;trigger&quot;: true}]}]</string>
           </property>
           <property name="settingName" stdset="0">
-           <string>surface-scan.x0</string>
+           <string>surface-scan.depthz</string>
           </property>
           <property name="textFormat" stdset="0">
            <string/>
@@ -1249,72 +1249,6 @@ color: white;
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <item>
-        <widget class="SubCallButton" name="update_surface_scan_params">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>27</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>27</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">SubCallButton{
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    color: rgb(238, 238, 236);
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(81, 86, 85), stop:0.489795 rgb(99, 102, 102), stop:0.699799 rgb(85, 88, 94), stop:0.90444 rgb(77, 84, 86), stop:0.160246 rgb(83, 84, 91), stop:1 rgb(109, 115, 118));
-	font: 14pt &quot;Bebas Kai&quot;;
-}
-
-.SubCallButton:disabled {
-    border-color: gray;
-}
-
-.SubCallButton:hover {
-    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                     stop: 0 #A19E9E, stop: 1.0 #5C5959);
-}
-
-.SubCallButton:pressed {
-    background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
-}
-
-.SubCallButton:checked[option=&quot;true&quot;] {
-    background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
-}
-
-.SubCallButton:checked {
-    background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
-}</string>
-         </property>
-         <property name="text">
-          <string>STORE PROBE PARAMS</string>
-         </property>
-         <property name="filename" stdset="0">
-          <string>surface_scan_param_update.ngc</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </item>
@@ -1356,24 +1290,24 @@ color: white;
     font-size: 15pt;
 }
 
-.SubCallButton:disabled {
+QPushButton:disabled {
     border-color: gray;
 }
 
-.SubCallButton:hover {
+QPushButton:hover {
     background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                      stop: 0 #A19E9E, stop: 1.0 #5C5959);
 }
 
-.SubCallButton:pressed {
+QPushButton:pressed {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }
 
-.SubCallButton:checked[option=&quot;true&quot;] {
+QPushButton:checked[option=&quot;true&quot;] {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }
 
-.SubCallButton:checked {
+QPushButton:checked {
     background:  qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 85, 238, 255), stop:0.544974 rgba(90, 91, 239, 255), stop:1 rgba(126, 135, 243, 255));
 }</string>
       </property>
@@ -1387,23 +1321,72 @@ color: white;
     </item>
     <item>
      <widget class="HalButton" name="halbutton">
-      <property name="font">
-       <font>
-        <family>BebasKai</family>
-        <pointsize>15</pointsize>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string>Compensation map enable</string>
-      </property>
-      <property name="checkable">
-       <bool>true</bool>
-      </property>
-      <property name="pinBaseName" stdset="0">
-       <string>halbutton_compensation_enable</string>
-      </property>
-     </widget>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>BebasKai</family>
+         <pointsize>15</pointsize>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">HalButton {
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(213, 218, 216, 255), stop:0.169312 rgba(82, 82, 83, 255), stop:0.328042 rgba(72, 70, 73, 255), stop:0.492063 rgba(78, 77, 79, 255), stop:0.703704 rgba(72, 70, 73, 255), stop:0.86 rgba(82, 82, 83, 255), stop:1 rgba(213, 218, 216, 255));
+    font-family: &quot;BebasKai&quot;;
+    font-size: 15pt;
+}
+
+HalButton:disabled {
+    border-color: gray;
+    color: gray;
+}
+
+HalButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #A19E9E, stop: 1.0 #5C5959);
+}
+
+HalButton:pressed {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 140, 0, 255), stop:0.544974 rgba(255, 150, 30, 255), stop:1 rgba(255, 180, 80, 255));
+}
+
+HalButton:checked {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 238, 85, 255), stop:0.544974 rgba(90, 239, 91, 255), stop:1 rgba(126, 243, 135, 255));
+    color: black;
+    font-weight: bold;
+}</string>
+       </property>
+       <property name="text">
+        <string>Compensation Enable</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="pinBaseName" stdset="0">
+        <string>halbutton_compensation_enable</string>
+       </property>
+      </widget>
     </item>
    </layout>
   </widget>
@@ -1462,165 +1445,5 @@ color: white;
   <include location="../../probe_basic/src/probe_basic/probe_basic.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>surface_scan_x0_3050</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>191</x>
-     <y>105</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>508</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>surface_scan_x1_3051</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>486</x>
-     <y>107</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>416</x>
-     <y>515</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>surface_scan_y1_3053</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>480</x>
-     <y>182</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>402</x>
-     <y>510</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>surface_scan_yprobes_3055</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>379</x>
-     <y>247</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>369</x>
-     <y>506</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>probe_fast_fr_3056</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>200</x>
-     <y>387</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>209</x>
-     <y>503</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>surface_scan_safez_3058</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>175</x>
-     <y>456</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>172</x>
-     <y>501</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>surface_scan_depthz_3059</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>451</x>
-     <y>445</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>460</x>
-     <y>502</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>probe_slow_fr_3057</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>496</x>
-     <y>382</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>493</x>
-     <y>514</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>surface_scan_y0_3052</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>187</x>
-     <y>174</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>300</x>
-     <y>518</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>surface_scan_xprobes_3054</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>update_surface_scan_params</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>209</x>
-     <y>264</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>266</x>
-     <y>510</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
 </ui>
