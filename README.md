@@ -7,6 +7,7 @@ This is a user tab to simplify surface mapping and compensation for Probe Basic 
 1. Install compensation component by scottalford75: https://github.com/scottalford75/LinuxCNC-3D-Printing/tree/master/compensation
 2. Copy the `surfacemap` directory into `~/linuxcnc/configs/yourconfig/user_tabs/`
 3. Copy contents of `subroutines` folder into `~/linuxcnc/configs/yourconfig/subroutines/`
+4. Add HAL connections to your postgui HAL file (see HAL Configuration section below)
 
 ## Usage
 
@@ -56,6 +57,33 @@ Parameters are written directly to LinuxCNC numbered variables (#3050-#3059) usi
 - The "STORE PROBE PARAMS" button can be used to manually update all parameters at once
 - Parameters are persistent and saved to the LinuxCNC var file
 - The surface_scan.ngc subroutine reads these parameters directly from the numbered variables
+
+## HAL Configuration
+
+The compensation enable button creates HAL pins that need to be connected in your postgui HAL file.
+
+### Automatic HAL Pins Created
+
+The button with `pinBaseName = "halbutton_compensation_enable"` automatically creates:
+- `qtpyvcp.halbutton_compensation_enable.on` - HAL_BIT OUT pin (True when button is checked)
+
+### Required HAL Connections
+
+Add the following to your `POSTGUI_HALFILE` (e.g., `custom_postgui.hal`):
+
+```hal
+# Connect compensation enable button to compensation component
+net compensation-enable qtpyvcp.halbutton_compensation_enable.on => compensation.enable-in
+
+# Read compensation status back to update button state (optional but recommended)
+net compensation-status compensation.enable-out => qtpyvcp.halbutton_compensation_enable.checked-in
+```
+
+**Explanation:**
+- First line: Button output controls the compensation component's enable input
+- Second line: Compensation component's status feeds back to button for visual state (green when enabled)
+
+**Note:** The signal name `compensation-on` in your HAL file is your choice. The example above uses `compensation-enable` and `compensation-status` as signal names.
 
 ## Technical Details
 

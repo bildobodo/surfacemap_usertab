@@ -1449,12 +1449,6 @@ HalButton:checked {
        <property name="pinBaseName" stdset="0">
         <string>halbutton_compensation_enable</string>
        </property>
-       <property name="checkedStatePin" stdset="0">
-        <string>compensation.enable-out</string>
-       </property>
-       <property name="outputPin" stdset="0">
-        <string>compensation.compensation-on</string>
-       </property>
       </widget>
     </item>
    </layout>
