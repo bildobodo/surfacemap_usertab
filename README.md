@@ -68,7 +68,7 @@ The button with `pinBaseName = "halbutton_compensation_enable"` automatically cr
 
 ### Required HAL Connections
 
-Add the following to your `POSTGUI_HALFILE` (e.g., `custom_postgui.hal`):
+Add the following to your `POSTGUI_HALFILE` (e.g., `probe_basic_postgui.hal`):
 
 ```hal
 # Connect compensation enable button to compensation component
