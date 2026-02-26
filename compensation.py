@@ -46,13 +46,18 @@ class Compensation :
 			sys.exit()
 
 		self.filename = sys.argv[1]
-		self.method = sys.argv[2]
-		
-		# default to cubic if not specified
-		if self.method == "" : self.method = "cubic"
 
+		# Map CLI method name to U32 index (for HAL pin default)
+		_method_arg = sys.argv[2] if len(sys.argv) >= 3 else ""
+		self.default_method = {"nearest": 0, "linear": 1, "cubic": 2}.get(_method_arg, 2)
+
+
+	# HAL U32 → scipy griddata method name
+	METHOD_NAMES = {0: "nearest", 1: "linear", 2: "cubic"}
 
 	def loadMap(self) :
+		method = self.METHOD_NAMES.get(self.h['method'], 'cubic')
+
 		# data coordinates and values
 		self.data = np.loadtxt(self.filename, dtype=float, delimiter=" ", usecols=(0, 1, 2))
 		self.x_data = np.around(self.data[:,0],1)
@@ -69,6 +74,7 @@ class Compensation :
 		print (" xMax = ", self.xMax)
 		print (" yMin = ", self.yMin)
 		print (" yMax = ", self.yMax)
+		print (" method = ", method)
 
 		# higher resolution target grid to interpolate to
 		self.xSteps = int((self.xMax-self.xMin) / self.h['resolution']) + 1
@@ -78,7 +84,7 @@ class Compensation :
 		self.xi,self.yi = np.meshgrid(self.x,self.y)
 
 		# interpolate the higher res copy, zi has all the offset values but need to be transposed
-		self.zi = griddata((self.x_data,self.y_data),self.z_data,(self.xi,self.yi),method=self.method)
+		self.zi = griddata((self.x_data,self.y_data),self.z_data,(self.xi,self.yi),method=method)
 		self.zi = np.transpose(self.zi)
 	
 
@@ -120,15 +126,17 @@ class Compensation :
 		self.h.newpin("fade-height", hal.HAL_FLOAT, hal.HAL_IN)
 		self.h.newpin("resolution", hal.HAL_FLOAT, hal.HAL_IN)
 		self.h.newpin("eoffset", hal.HAL_FLOAT, hal.HAL_IN)
-		self.h.newpin("eoffset-limited", hal.HAL_BIT, hal.HAL_IN)	      
+		self.h.newpin("eoffset-limited", hal.HAL_BIT, hal.HAL_IN)
+		self.h.newpin("method", hal.HAL_U32, hal.HAL_IN)
 		self.h.ready()
-		
+
 		s = linuxcnc.stat()
-		
+
 		currentState = States.START
 		prevState = States.STOP
 
 		self.h['resolution'] = 1 #give the resolution pin a value of 1
+		self.h['method'] = self.default_method
 
 		try:
 			while True:
@@ -146,6 +154,7 @@ class Compensation :
 					print(" %s last modified: %s" % (self.filename, time.ctime(os.path.getmtime(self.filename))))
 					
 					prevMapTime = 0
+					prevMethod = self.h['method']
 					
 					self.h["counts"] = 0
 					
@@ -167,13 +176,15 @@ class Compensation :
 						prevState = currentState
 			
 					mapTime = os.path.getmtime(self.filename)
+					currentMethod = self.h['method']
 
 					#if mapTime != prevMapTime:
-					if (mapTime != prevMapTime) or (self.h['resolution'] != PrevResolution):
+					if (mapTime != prevMapTime) or (self.h['resolution'] != PrevResolution) or (currentMethod != prevMethod):
 						self.loadMap()
 						print("	Compensation map loaded")
 						prevMapTime = mapTime
 						PrevResolution = self.h['resolution']
+						prevMethod = currentMethod
 
 
 					# transition to RUNNING state
@@ -185,7 +196,11 @@ class Compensation :
 						prevState = currentState
 			
 					if self.h["enable-in"] :
-						# enable external offsets
+						# reload map if method or resolution changed at runtime
+						if self.h['method'] != prevMethod or self.h['resolution'] != PrevResolution:
+							currentState = States.LOADMAP
+							continue
+
 						self.h["enable-out"] = 1
 						
 						fadeHeight = self.h["fade-height"]
