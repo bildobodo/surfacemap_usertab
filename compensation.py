@@ -119,7 +119,7 @@ class Compensation :
 		self.h.newpin("enable-out", hal.HAL_BIT, hal.HAL_OUT)
 		self.h.newpin("scale", hal.HAL_FLOAT, hal.HAL_IN)
 		self.h.newpin("counts", hal.HAL_S32, hal.HAL_OUT)
-		self.h.newpin("clear", hal.HAL_BIT, hal.HAL_IN)
+		self.h.newpin("clear", hal.HAL_BIT, hal.HAL_OUT)
 		self.h.newpin("x-pos", hal.HAL_FLOAT, hal.HAL_IN)
 		self.h.newpin("y-pos", hal.HAL_FLOAT, hal.HAL_IN)
 		self.h.newpin("z-pos", hal.HAL_FLOAT, hal.HAL_IN)
@@ -233,22 +233,22 @@ class Compensation :
 					if currentState != prevState :
 						print("\nCompensation entering RESET state")
 						prevState = currentState
+						# Zero counts and pulse clear WHILE STILL ENABLED
+						# (disabling first would freeze the offset — counts are delta-based)
+						self.h["counts"] = 0
+						self.h["clear"] = 1
+					elif self.h["clear"] :
+						# Release clear after one iteration
+						self.h["clear"] = 0
 
-					# set the clear output to 1
-					self.h["clear"] = 1
-
-					# busy wait for compensation.clear (and hence axis.z.eoffset-clear) to clear the external offset
-					# every 0.1 seconds check if the current external offset float is sufficiently close to 0, AND that motion is not inhibited due to a soft limit
-					while round(self.h["eoffset"], 5) != 0 or self.h["eoffset-limited"] == 1:
-						time.sleep(0.1)
-
-					# set the clear output back to 0, set the counter to 0, and disable external offsets
-					self.h["clear"] = 0
-					self.h["counts"] = 0
-					self.h["enable-out"] = 0
-					
-					# transition to IDLE state
-					currentState = States.IDLE
+					# Wait for eoffset to drain to ~0 before disabling
+					# (eoffset ramps via OFFSET_AV_RATIO, can't disable until it reaches 0)
+					if abs(self.h["eoffset"]) < 0.0001 :
+						self.h["enable-out"] = 0
+						currentState = States.IDLE
+					elif self.h["enable-in"] :
+						# User re-enabled during drain — go back to running
+						currentState = States.LOADMAP
 
 		except KeyboardInterrupt:
 	  	  raise SystemExit
